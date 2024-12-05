@@ -1,23 +1,23 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-
+// src/App.jsx
+import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-
-import telaPrincipal from "./pages/tela-principal/src/App.jsx";
+import TelaLogin from "./pages/tela-login/src/App";
+import NotificacaoPopUp from "./pages/notificacao-pop-up/src/App"
+import RecuperacaoSenha from "./pages/recuperacao-senha/src/App";
+import TelaPrincipal from "./pages/tela-principal/src/App"; 
 
 
 function App() {
   return (
-      <Router>
-          <Routes>
-              <Route path="/" element={<telaPrincipal />} />
-              <Route path="/about" element={<About />} />
-              <Route path="/contact" element={<Contact />} />
-          </Routes>
-      </Router>
+    <Router>
+      <Routes>
+        <Route path="/" element={<TelaLogin />} />
+        <Route path="/TelaPrincipal" element={<TelaPrincipal />} />
+        <Route path="/recupSenha" element={<RecuperacaoSenha />} />
+        <Route path="/notificacao" element={<NotificacaoPopUp />} />
+      </Routes>
+    </Router>
   );
 }
 
-export default App
+export default App;

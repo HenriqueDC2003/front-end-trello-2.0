@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./PasswordRecovery.css";
 
-const PasswordRecovery = () => {
+const RecuperacaoSenha = () => {
   const [email, setEmail] = useState("");
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
@@ -54,4 +54,4 @@ const PasswordRecovery = () => {
   );
 };
 
-export default PasswordRecovery;
+export default RecuperacaoSenha;
