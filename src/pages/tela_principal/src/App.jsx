@@ -30,6 +30,7 @@ const fadeIn = keyframes`
 `;
 
 function App() {
+
   const [showForm, setShowForm] = useState(false);
   const [editGoalIndex, setEditGoalIndex] = useState(null); // Índice da meta em edição
   const [newGoal, setNewGoal] = useState({
@@ -346,6 +347,12 @@ const GoalSection = styled.div`
   max-width: 100%;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+`;
+
+const GoalDetails1 = styled.div`  // Changed this line
+  font-size: 14px;
+  color: ${(props) => props.theme.secondaryText};
+  margin-top: 5px;
 `;
 
 const GoalCard = styled.div`
