@@ -121,8 +121,16 @@ function App() {
     }
   };
 
-  const goalsToday = goals.filter((goal) => goal.date.toDateString() === today.toDateString());
-  const allOtherGoals = goals.filter((goal) => goal.date.toDateString() !== today.toDateString());
+
+const goalsToday = goals.filter(
+  (goal) => goal.date.toDateString() === today.toDateString()
+);
+
+
+const allOtherGoals = goals.filter(
+  (goal) => goal.date.toDateString() !== today.toDateString()
+);
+
 
   return (
     <ThemeProvider theme={theme}>
@@ -165,48 +173,58 @@ function App() {
               </Form>
             </FormContainer>
           )}
-          <GoalsContainer>
+            <GoalsContainer>
             <SectionTitle>Metas do Dia</SectionTitle>
             <GoalSection>
-              {goalsToday.map((goal, index) => (
-                <GoalCard key={index}>
-                  <GoalTitle>{goal.title}</GoalTitle>
-                  <GoalDetails>
-                    <Detail><strong>Data:</strong> {goal.date.toLocaleDateString("pt-BR")}</Detail>
-                    <Detail><strong>Descrição:</strong> {goal.description}</Detail>
-                    <Progress>
-                      <ProgressBar width={goal.progress} />
-                      <ProgressText>{goal.progress}%</ProgressText>
-                    </Progress>
-                    <ButtonContainer>
-                      <EditButton onClick={() => editGoal(index)}>Editar</EditButton>
-                      <CompleteButton onClick={() => completeGoal(index)}>Concluir</CompleteButton>
-                      <DeleteButton onClick={() => deleteGoal(index)}>Excluir</DeleteButton>
-                    </ButtonContainer>
-                  </GoalDetails>
-                </GoalCard>
-              ))}
+              {goalsToday.map((goal, index) => {
+                const originalIndex = goals.findIndex(
+                  (g) => g.date.toDateString() === goal.date.toDateString() && g.title === goal.title
+                );
+                return (
+                  <GoalCard key={originalIndex}>
+                    <GoalTitle>{goal.title}</GoalTitle>
+                    <GoalDetails>
+                      <Detail><strong>Data:</strong> {goal.date.toLocaleDateString("pt-BR")}</Detail>
+                      <Detail><strong>Descrição:</strong> {goal.description}</Detail>
+                      <Progress>
+                        <ProgressBar width={goal.progress} />
+                        <ProgressText>{goal.progress}%</ProgressText>
+                      </Progress>
+                      <ButtonContainer>
+                        <EditButton onClick={() => editGoal(originalIndex)}>Editar</EditButton>
+                        <CompleteButton onClick={() => completeGoal(originalIndex)}>Concluir</CompleteButton>
+                        <DeleteButton onClick={() => deleteGoal(originalIndex)}>Excluir</DeleteButton>
+                      </ButtonContainer>
+                    </GoalDetails>
+                  </GoalCard>
+                );
+              })}
             </GoalSection>
             <SectionTitle>Todas as Metas</SectionTitle>
             <GoalSection>
-              {allOtherGoals.map((goal, index) => (
-                <GoalCard key={index}>
-                  <GoalTitle>{goal.title}</GoalTitle>
-                  <GoalDetails>
-                    <Detail><strong>Data:</strong> {goal.date.toLocaleDateString("pt-BR")}</Detail>
-                    <Detail><strong>Descrição:</strong> {goal.description}</Detail>
-                    <Progress>
-                      <ProgressBar width={goal.progress} />
-                      <ProgressText>{goal.progress}%</ProgressText>
-                    </Progress>
-                    <ButtonContainer>
-                      <EditButton onClick={() => editGoal(index)}>Editar</EditButton>
-                      <CompleteButton onClick={() => completeGoal(index)}>Concluir</CompleteButton>
-                      <DeleteButton onClick={() => deleteGoal(index)}>Excluir</DeleteButton>
-                    </ButtonContainer>
-                  </GoalDetails>
-                </GoalCard>
-              ))}
+              {allOtherGoals.map((goal, index) => {
+                const originalIndex = goals.findIndex(
+                  (g) => g.date.toDateString() === goal.date.toDateString() && g.title === goal.title
+                );
+                return (
+                  <GoalCard key={originalIndex}>
+                    <GoalTitle>{goal.title}</GoalTitle>
+                    <GoalDetails>
+                      <Detail><strong>Data:</strong> {goal.date.toLocaleDateString("pt-BR")}</Detail>
+                      <Detail><strong>Descrição:</strong> {goal.description}</Detail>
+                      <Progress>
+                        <ProgressBar width={goal.progress} />
+                        <ProgressText>{goal.progress}%</ProgressText>
+                      </Progress>
+                      <ButtonContainer>
+                        <EditButton onClick={() => editGoal(originalIndex)}>Editar</EditButton>
+                        <CompleteButton onClick={() => completeGoal(originalIndex)}>Concluir</CompleteButton>
+                        <DeleteButton onClick={() => deleteGoal(originalIndex)}>Excluir</DeleteButton>
+                      </ButtonContainer>
+                    </GoalDetails>
+                  </GoalCard>
+                );
+              })}
             </GoalSection>
           </GoalsContainer>
           <StyledCalendar tileClassName={tileClassName} />
@@ -241,6 +259,7 @@ const Logo = styled.img`
   width: 150px;
   height: auto;
   margin-bottom: 10px;
+
 `;
 
 const Title = styled.h1`
@@ -347,12 +366,9 @@ const GoalSection = styled.div`
   max-width: 100%;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-`;
-
-const GoalDetails1 = styled.div`  // Changed this line
-  font-size: 14px;
-  color: ${(props) => props.theme.secondaryText};
-  margin-top: 5px;
+   @media (min-width: 768px) {
+    grid-template-columns: repeat(3, 1fr); /* 3 colunas em telas grandes */
+  }
 `;
 
 const GoalCard = styled.div`
@@ -365,13 +381,14 @@ const GoalCard = styled.div`
 
   /* Mantém 3 colunas em telas maiores */
   @media (max-width: 768px) {
-    width: calc(33.33% - 10px); /* Três colunas também em tablets */
+    width: calc(33.33% - 10px); /* Três colunas também em tablets */ 
   }
 
   /* Ajusta para uma coluna em telas muito pequenas */
   @media (max-width: 480px) {
     width: 100%; /* Uma coluna */
   }
+
 `;
 
 
