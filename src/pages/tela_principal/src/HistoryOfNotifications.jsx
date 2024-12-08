@@ -1,29 +1,38 @@
 import React from "react";
-import styled from "styled-components";
+import styled,{ ThemeProvider } from "styled-components";
 
-const HistoryOfNotifications = ({ notifications }) => {
-  console.log(notifications); // Check for data
-
-  return (
-    <div>
-      {notifications.map((notification, index) => (
-        <NotificationCard key={index}>
-          <h2>{notification.title}</h2>
-          <p>{notification.description}</p>
-          <p>Data: {notification.date}</p>
-          {/* Adicione outros elementos para exibir o progresso, etc. */}
-          {console.log("Rendering notification", notification)} // Check loop execution
-        </NotificationCard>
-      ))}
-    </div>
-  );
+const theme = {
+  background: "#0D0D0D",
+  text: "#FFFFFF",
+  secondaryText: "#B3B3B3",
+  cardBackground: "#1A1A1A",
+  lowPriority: "#4CAF50",
+  mediumPriority: "#FFEB3B",
+  highPriority: "#F44336",
+  buttonGreen: "#1DB954", // Verde Spotify
 };
 
-const NotificationCard = styled.div`
-  background-color: "yellow";  // Temporary test color
-  border: 1px solid #ccc;
-  padding: 10px;
-  margin: 10px;
+const Card = styled.div`
+  background-color: ${(props) => props.theme.cardBackground};
+  padding: 15px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 `;
+
+
+const HistoryOfNotifications = () => {
+  return (
+    <ThemeProvider theme={theme}>
+      <Card>
+      {/* Add your card content here */}
+      <h2>Card Title</h2>
+      <p>Card content goes here.</p>
+    </Card>
+    </ThemeProvider>
+    
+  );
+};
 
 export default HistoryOfNotifications;
