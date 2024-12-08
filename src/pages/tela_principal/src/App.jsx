@@ -242,10 +242,11 @@ const AppContainer = styled.div`
   align-items: center;
   background-color: ${(props) => props.theme.background};
   color: ${(props) => props.theme.text};
-  min-height: 100vh;
   width: 100vw;
+   height: 100vh; /* Set height to 100vh for full viewport */
   padding: 20px;
-  box-sizing: border-box;
+  box-sizing: border-box; 
+  overflow-y: auto; /* Enable vertical scrolling */
 `;
 
 const LogoContainer = styled.div`
@@ -259,12 +260,17 @@ const Logo = styled.img`
   width: 150px;
   height: auto;
   margin-bottom: 10px;
-
+   @media (max-width: 768px) {
+    width: 100px; /* Adjust logo size for smaller screens */
+  }
 `;
 
 const Title = styled.h1`
   font-size: 24px;
   font-weight: bold;
+  @media (max-width: 768px) {
+    font-size: 20px; /* Adjust title size for smaller screens */
+  }
 `;
 
 const MainContent = styled.div`
@@ -272,7 +278,7 @@ const MainContent = styled.div`
   flex-direction: column;
   align-items: center;
   width: 100%;
-  height: 100%;
+  height: auto;
   max-width: 800px;
 `;
 
@@ -305,6 +311,9 @@ const FormTitle = styled.h2`
   font-size: 20px;
   font-weight: bold;
   margin-bottom: 10px;
+   @media (max-width: 768px) {
+    max-width: 100%; /* Allow full width on smaller screens */
+  }
 `;
 
 const Form = styled.div`
