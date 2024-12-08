@@ -10,7 +10,7 @@ const Login = () => {
   };
 
   const recupSenha = () => {
-    navigate('/RecupSenha');
+    navigate('/recupSenha');
   };
 
   return (
