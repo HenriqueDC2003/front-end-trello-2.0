@@ -1,8 +1,20 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
+
 
 const HamburgerMenu = () => {
+
+  const navigate = useNavigate()
+
+  const historyGoals = () => {
+    navigate('/HistoryOfGoals');  // Navega para a página About
+  };
+  
+  const historyNotifications = () => {
+    navigate('/HistoryOfNotifications');  // Navega para a página About
+  };
+
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleMenu = () => {
@@ -21,10 +33,10 @@ const HamburgerMenu = () => {
       {/* Itens do Menu */}
       {isOpen && (
         <MenuDropdown>
-          <MenuItem onClick={() => console.log("Histórico de Metas clicado")}>
-            Histórico de Metas
+          <MenuItem onClick={() => { console.log("Histórico de Notificações clicado"); historyGoals();}}>
+            Histórico de Notificações
           </MenuItem>
-          <MenuItem onClick={() => console.log("Histórico de Notificações clicado")}>
+          <MenuItem onClick={() => {console.log("Histórico de Notificações clicado");  historyNotifications()}}>
             Histórico de Notificações
           </MenuItem>
         </MenuDropdown>

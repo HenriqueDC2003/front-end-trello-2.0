@@ -5,6 +5,7 @@ import "react-calendar/dist/Calendar.css";
 import GoalifyLogo from "./assets/GoalifyLogo.png"; // Verifique o caminho do logo
 import HamburgerMenu from "./HamburgerMenu.jsx";
 
+
 // Tema de cores para o Goalify
 const theme = {
   background: "#0D0D0D",

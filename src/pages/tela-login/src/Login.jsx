@@ -6,7 +6,11 @@ const Login = () => {
   const navigate = useNavigate()
 
   const handleClick = () => {
-    navigate('/TelaPrincipal');  // Navega para a página About
+    navigate('/TelaPrincipal');  
+  };
+
+  const recupSenha = () => {
+    navigate('/RecupSenha');
   };
 
   return (
@@ -24,7 +28,7 @@ const Login = () => {
           </div>
           <button type="submit" className="login-button" onClick={handleClick}>Entrar</button>
         </form>
-        <p className="login-footer">
+        <p className="login-footer" onClick={recupSenha}>
           Esqueceu sua senha? <a href="#">Recupere aqui</a>
         </p>
       </div>
