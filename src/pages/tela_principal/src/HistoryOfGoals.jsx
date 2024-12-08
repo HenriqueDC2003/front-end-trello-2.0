@@ -81,7 +81,7 @@ const HistoryOfGoals = () => {
 
 const Container = styled.div`
   padding: 20px;
-  background-color: var(--background-color);
+  background-color: #0D0D0D;
   color: var(--text-primary);
   border-radius: 8px;
   margin: 20px auto;

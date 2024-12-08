@@ -6,6 +6,7 @@ import GoalifyLogo from "./assets/GoalifyLogo.png"; // Verifique o caminho do lo
 import HamburgerMenu from "./HamburgerMenu.jsx";
 
 
+
 // Tema de cores para o Goalify
 const theme = {
   background: "#0D0D0D",
@@ -54,11 +55,6 @@ function App() {
   const today = new Date();
 
   const openForm = () => setShowForm(!showForm);
-
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setNewGoal({ ...newGoal, [name]: value });
-  };
 
   const addGoal = () => {
     const goal = {
