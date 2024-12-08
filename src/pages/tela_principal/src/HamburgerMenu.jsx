@@ -8,11 +8,11 @@ const HamburgerMenu = () => {
   const navigate = useNavigate()
 
   const historyGoals = () => {
-    navigate('/HistoryOfGoals');  // Navega para a página About
+    navigate('/HistoryGoals');  // Navega para a página About
   };
   
   const historyNotifications = () => {
-    navigate('/HistoryOfNotifications');  // Navega para a página About
+    navigate('/HistoryNotifications');  // Navega para a página About
   };
 
   const [isOpen, setIsOpen] = useState(false);
@@ -34,7 +34,7 @@ const HamburgerMenu = () => {
       {isOpen && (
         <MenuDropdown>
           <MenuItem onClick={() => { console.log("Histórico de Notificações clicado"); historyGoals();}}>
-            Histórico de Notificações
+            Histórico de Metas
           </MenuItem>
           <MenuItem onClick={() => {console.log("Histórico de Notificações clicado");  historyNotifications()}}>
             Histórico de Notificações

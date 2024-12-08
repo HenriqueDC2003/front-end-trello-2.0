@@ -388,17 +388,6 @@ const GoalCard = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-
-  /* Mantém 3 colunas em telas maiores */
-  @media (max-width: 768px) {
-    width: calc(33.33% - 10px); /* Três colunas também em tablets */ 
-  }
-
-  /* Ajusta para uma coluna em telas muito pequenas */
-  @media (max-width: 480px) {
-    width: 100%; /* Uma coluna */
-  }
-
 `;
 
 
