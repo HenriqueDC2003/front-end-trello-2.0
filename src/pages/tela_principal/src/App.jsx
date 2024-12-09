@@ -4,6 +4,7 @@ import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import GoalifyLogo from "./assets/GoalifyLogo.png"; // Verifique o caminho do logo
 import HamburgerMenu from "./HamburgerMenu.jsx";
+import {useNavigate} from "react-router-dom";
 
 
 // Tema de cores para o Goalify
@@ -31,6 +32,8 @@ const fadeIn = keyframes`
 `;
 
 function App() {
+
+  const navigate = useNavigate();
 
   const [showForm, setShowForm] = useState(false);
   const [editGoalIndex, setEditGoalIndex] = useState(null); // Índice da meta em edição
@@ -60,6 +63,32 @@ function App() {
     setNewGoal({ ...newGoal, [name]: value });
   };
 
+  const updateHistory = () => {
+    if (!newGoal.title || !newGoal.description) {
+      alert("Preencha os campos obrigatórios para a tarefa (título e descrição)");
+      return;
+    }
+
+    let newGoalStatus;
+    if (newGoal.date <= new Date()) {
+      newGoalStatus = "Atrasada";
+    } else {
+      newGoalStatus = "Atual"
+    }
+
+    const data = {
+      title: newGoal.title,
+      description: newGoal.description,
+      creationTime: new Date().toISOString(),
+      deadline: newGoal.date,
+      status: newGoalStatus,
+    };
+
+    console.log(data);
+
+    navigate("/HistoryGoals", { state: { goalData: data } });
+  };
+
   const addGoal = () => {
     const goal = {
       ...newGoal,
@@ -72,6 +101,7 @@ function App() {
       alert("Por favor, preencha os campos obrigatórios.");
       return;
     }
+    updateHistory()
   };
 
   const updateGoal = () => {
@@ -85,6 +115,7 @@ function App() {
       setGoals(updatedGoals);
       setEditGoalIndex(null);
       setShowForm(false);
+      updateHistory()
     }
   };
 
