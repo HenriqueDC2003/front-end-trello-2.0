@@ -7,6 +7,7 @@ import HamburgerMenu from "./HamburgerMenu.jsx";
 import {useNavigate} from "react-router-dom";
 
 
+
 // Tema de cores para o Goalify
 const theme = {
   background: "#0D0D0D",

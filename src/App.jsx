@@ -17,8 +17,8 @@ function App() {
         <Route path="/" element={<TelaLogin />} />
         <Route path="/TelaPrincipal" element={<TelaPrincipal />} />
         <Route path="/recupSenha" element={<RecuperacaoSenha />} />
-        <Route path="/notificacao" element={<NotificacaoPopUp />} />
-        <Route path="/historyGoals" element={<HistoryOfGoals />} />
+        <Route path="/notificacaoPopUp" element={<NotificacaoPopUp />} />
+        <Route path="/HistoryGoals" element={<HistoryOfGoals />} />
         <Route path="/HistoryNotifications" element={<HistoryOfNotifications />} />
       </Routes>
     </Router>
