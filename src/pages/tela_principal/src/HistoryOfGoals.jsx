@@ -1,82 +1,112 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
-import styled from "styled-components";
+import {useLocation, useNavigate} from "react-router-dom";
+import styled, { ThemeProvider } from "styled-components";
 
+
+const theme = {
+    background: "#0D0D0D",
+    text: "#FFFFFF",
+    secondaryText: "#B3B3B3",
+    cardBackground: "#1A1A1A",
+    lowPriority: "#4CAF50",
+    mediumPriority: "#FFEB3B",
+    highPriority: "#F44336",
+    buttonGreen: "#1DB954", // Verde Spotify
+}
 
 const HistoryOfGoals = () => {
-  const navigate = useNavigate();
+    const navigate = useNavigate()
+    const location = useLocation()
 
-  const goals = [
-    { id: 1, title: "Meta 1", status: "Concluída", deadline: "2023-12-01" },
-    { id: 2, title: "Meta 2", status: "Atrasada", deadline: "2023-12-05" },
-    { id: 3, title: "Meta 3", status: "Atual", deadline: "2023-12-10" },
-  ];
+    const goalData = location.state?.goalData || {};
+    let goalCount = 4;
 
-  const completedGoals = goals.filter((goal) => goal.status === "Concluída");
-  const delayedGoals = goals.filter((goal) => goal.status === "Atrasada");
-  const currentGoals = goals.filter((goal) => goal.status === "Atual");
+    const goals = [
+        { id: 1, title: "Meta 1", status: "Concluída", deadline: "2023-12-01", creationTime: "2023-11-04" },
+        { id: 2, title: "Meta 2", status: "Atrasada", deadline: "2023-12-05", creationTime: "2022-04-25" },
+        { id: 3, title: "Meta 3", status: "Atual", deadline: "2023-12-10", creationTime: "2023-12-04" },
+    ];
 
-  return (
-    <Container>
-      <Header>
-        <BackButton onClick={() => navigate("/TelaPrincipal")}>
-          Voltar
-        </BackButton>
-        <Title>Histórico de Metas</Title>
-      </Header>
+    goals.push(
+        {
+            id: goalCount,
+            title: goalData.title,
+            status: goalData.status,
+            deadline: goalData.deadline,
+            creationTime: goalData.creationTime,
+        }
+    );
+    goalCount += 1;
 
-      <Section>
-        <SectionTitle>Metas Concluídas</SectionTitle>
-        {completedGoals.length > 0 ? (
-          <List>
-            {completedGoals.map((goal) => (
-              <ListItem key={goal.id}>
-                <Indicator color="#1db954" />
-                <span>{goal.title}</span>
-                <span>{goal.deadline}</span>
-              </ListItem>
-            ))}
-          </List>
-        ) : (
-          <Message>Nenhuma meta concluída.</Message>
-        )}
-      </Section>
+    console.log(goalData)
 
-      <Section>
-        <SectionTitle>Metas Atrasadas</SectionTitle>
-        {delayedGoals.length > 0 ? (
-          <List>
-            {delayedGoals.map((goal) => (
-              <ListItem key={goal.id}>
-                <Indicator color="#FF0000" />
-                <span>{goal.title}</span>
-                <span>{goal.deadline}</span>
-              </ListItem>
-            ))}
-          </List>
-        ) : (
-          <Message>Nenhuma meta atrasada.</Message>
-        )}
-      </Section>
+    const completedGoals = goals.filter((goal) => goal.status === "Concluída");
+    const delayedGoals = goals.filter((goal) => goal.status === "Atrasada");
+    const currentGoals = goals.filter((goal) => goal.status === "Atual");
 
-      <Section>
-        <SectionTitle>Metas Atuais</SectionTitle>
-        {currentGoals.length > 0 ? (
-          <List>
-            {currentGoals.map((goal) => (
-              <ListItem key={goal.id}>
-                <Indicator color="#FFD700" />
-                <span>{goal.title}</span>
-                <span>{goal.deadline}</span>
-              </ListItem>
-            ))}
-          </List>
-        ) : (
-          <Message>Nenhuma meta atual.</Message>
-        )}
-      </Section>
-    </Container>
-  );
+    return (
+    <ThemeProvider theme={theme}>
+      <Container>
+          <Header>
+            <BackButton onClick={() => navigate("/TelaPrincipal")}>
+              Voltar
+            </BackButton>
+            <Title>Histórico de Metas</Title>
+        </Header>
+
+        <Section>
+            <SectionTitle>Metas Concluídas</SectionTitle>
+            {completedGoals.length > 0 ? (
+            <List>
+                {completedGoals.map((goal) => (
+                <ListItem key={goal.id}>
+                    <Indicator color="#1db954" />
+                    <span>{goal.title}</span>
+                    <span>{goal.deadline}</span>
+                </ListItem>
+                ))}
+            </List>
+            ) : (
+            <Message>Nenhuma meta concluída.</Message>
+            )}
+        </Section>
+
+        <Section>
+            <SectionTitle>Metas Atrasadas</SectionTitle>
+            {delayedGoals.length > 0 ? (
+            <List>
+                {delayedGoals.map((goal) => (
+                <ListItem key={goal.id}>
+                    <Indicator color="#FF0000" />
+                    <span>{goal.title}</span>
+                    <span>{goal.deadline}</span>
+                </ListItem>
+                ))}
+            </List>
+            ) : (
+            <Message>Nenhuma meta atrasada.</Message>
+            )}
+        </Section>
+
+        <Section>
+            <SectionTitle>Metas Atuais</SectionTitle>
+            {currentGoals.length > 0 ? (
+            <List>
+                {currentGoals.map((goal) => (
+                <ListItem key={goal.id}>
+                    <Indicator color="#FFD700" />
+                    <span>{goal.title}</span>
+                    <span>{goal.deadline}</span>
+                </ListItem>
+                ))}
+            </List>
+            ) : (
+            <Message>Nenhuma meta atual.</Message>
+            )}
+        </Section>
+      </Container>
+    </ThemeProvider>
+    );
 };
 
 const Container = styled.div`
