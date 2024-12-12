@@ -20,7 +20,7 @@ const Login = () => {
         <form>
           <div className="input-group">
             <label htmlFor="email">Email</label>
-            <input type="email" id="email" placeholder="Digite seu email" />
+            <input type="text" id="username" placeholder="Digite seu username" />
           </div>
           <div className="input-group">
             <label htmlFor="password">Senha</label>
