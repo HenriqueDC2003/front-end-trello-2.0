@@ -125,6 +125,7 @@ const BackButton = styled.button`
     background-color: var(--button-hover, #17a043);
   }
   margin-right: 20px;
+  margin-left: 400px;
 `;
 
 const DeleteButton = styled.button`
@@ -147,7 +148,7 @@ const Header = styled.div`
 const Title = styled.h1`
   font-size: 28px;
   color: ${(props) => props.theme.text};
-  padding-left: 450px;
+  padding-left: 30px;
 `;
 
 export default HistoryOfNotifications;

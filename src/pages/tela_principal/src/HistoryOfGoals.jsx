@@ -15,8 +15,6 @@ const theme = {
 }
 
 const HistoryOfGoals = () => {
-
-  const [sections, setSections] = useState([]);
     const navigate = useNavigate()
     const location = useLocation()
 
@@ -42,57 +40,71 @@ const HistoryOfGoals = () => {
 
     console.log(goalData)
 
-      const completedGoals = goals.filter((goal) => goal.status === "Concluída");
-      const delayedGoals = goals.filter((goal) => goal.status === "Atrasada");
-      const currentGoals = goals.filter((goal) => goal.status === "Atual");
-    
-      setSections([
-        { id: 1, status: "Concluída", goals: completedGoals },
-        { id: 2, status: "Atrasada", goals: delayedGoals },
-        { id: 3, status: "Atual", goals: currentGoals },
-      ]);
-    
-  
-    const handleDeleteSection = (id) => {
-      // Remove a seção pelo id
-      setSections(sections.filter((section) => section.id !== id));
-    };
+    const completedGoals = goals.filter((goal) => goal.status === "Concluída");
+    const delayedGoals = goals.filter((goal) => goal.status === "Atrasada");
+    const currentGoals = goals.filter((goal) => goal.status === "Atual");
 
     return (
-      <ThemeProvider theme={theme}>
+    <ThemeProvider theme={theme}>
       <SuperContainer>
         <Container>
-          <Header>
-            <BackButton onClick={() => navigate("/TelaPrincipal")}>
-              Voltar
-            </BackButton>
-            <Title>Histórico de Metas</Title>
+            <Header>
+              <BackButton onClick={() => navigate("/TelaPrincipal")}>
+                Voltar
+              </BackButton>
+              <Title>Histórico de Metas</Title>
           </Header>
 
-          {sections.map((section) => (
-            <NotificationSection key={section.id}>
-              <SectionTitle>{`Metas ${section.status}`}</SectionTitle>
+          <Section>
+              <SectionTitle>Metas Concluídas</SectionTitle>
+              {completedGoals.length > 0 ? (
               <List>
-                {section.goals.length > 0 ? (
-                  section.goals.map((goal) => (
-                    <ListItem key={goal.id}>
-                      <DeleteButton onClick={() => handleDeleteSection(section.id)}>
-                X
-              </DeleteButton>
-                      <ContentWrapper>
-                        <TitleText>{goal.title}</TitleText>
-                        <DeadLine>{goal.deadline}</DeadLine>
-                      </ContentWrapper>
-                    </ListItem>
-                  ))
-                ) : (
-                  <ListItem>Nenhuma meta cadastrada.</ListItem>
-                )}
+                  {completedGoals.map((goal) => (
+                  <ListItem key={goal.id}>
+                    <DeleteButton onClick={() => handleDeleteSection(index)}>X</DeleteButton>
+                    <TitleText>{goal.title}</TitleText>
+                    <DeadLineText>{goal.deadline}</DeadLineText>
+                  </ListItem>
+                  ))}
               </List>
-            </NotificationSection>
-          ))}
+              ) : (
+              <Message>Nenhuma meta concluída.</Message>
+              )}
+          </Section>
 
-          
+          <Section>
+              <SectionTitle>Metas Atrasadas</SectionTitle>
+              {delayedGoals.length > 0 ? (
+              <List>
+                  {delayedGoals.map((goal) => (
+                  <ListItem key={goal.id}>
+                    <DeleteButton onClick={() => handleDeleteSection(index)}>X</DeleteButton>
+                    <TitleText>{goal.title}</TitleText>
+                    <DeadLineText>{goal.deadline}</DeadLineText>
+                  </ListItem>
+                  ))}
+              </List>
+              ) : (
+              <Message>Nenhuma meta atrasada.</Message>
+              )}
+          </Section>
+
+          <Section>
+              <SectionTitle>Metas Atuais</SectionTitle>
+              {currentGoals.length > 0 ? (
+              <List>
+                  {currentGoals.map((goal) => (
+                  <ListItem key={goal.id}>
+                    <DeleteButton onClick={() => handleDeleteSection(index)}>X</DeleteButton>
+                    <TitleText>{goal.title}</TitleText>
+                    <DeadLineText>{goal.deadline}</DeadLineText>
+                  </ListItem>
+                  ))}
+              </List>
+              ) : (
+              <Message>Nenhuma meta atual.</Message>
+              )}
+          </Section>
         </Container>
       </SuperContainer>
     </ThemeProvider>
@@ -102,10 +114,8 @@ const HistoryOfGoals = () => {
 
 
 const SuperContainer = styled.body`
-  display:flex;
-  align-itens:flex-start;
   background-color: #0D0D0D;
-  height: 100%;
+  heigth: 100%;
   width: 100vw;
 `;
 
@@ -116,18 +126,13 @@ const TitleText = styled.span`
   font-size: 18px;
   font-weight: bold;
   color: ${(props) => props.theme.text};
-  margin-right: 20px;
+  margin-right: 15px;
 `;
 
-const DeadLine = styled.span`
-  font-size: 18px;
-  font-weight: bold;
+const DeadLineText = styled.span`
+  margin-top: 5px;
+  font-size: 16px;
   color: ${(props) => props.theme.secondaryText};
-`;
-
-const ContentWrapper = styled.div`
-  flex-grow: 1;
-  margin-right: 10px;
 `;
 
 const Header = styled.div`
@@ -170,7 +175,7 @@ const Title = styled.h1`
   margin-right: 80px;
 `;
 
-const NotificationSection = styled.section`
+const Section = styled.section`
   margin-top: 20px;
   align-items: center;
   background-color: var(--card-background);
@@ -203,6 +208,12 @@ const ListItem = styled.li`
   justify-content: space-between;
   align-items: center;
   position: relative;
+`;
+
+const Message = styled.p`
+  font-size: 16px;
+  color: var(--text-secondary);
+  text-align: center;
 `;
 
 export default HistoryOfGoals;
