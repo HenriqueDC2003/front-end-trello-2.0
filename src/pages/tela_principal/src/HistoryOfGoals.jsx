@@ -62,8 +62,8 @@ const HistoryOfGoals = () => {
                   {completedGoals.map((goal) => (
                   <ListItem key={goal.id}>
                     <DeleteButton onClick={() => handleDeleteSection(index)}>X</DeleteButton>
-                      <span>{goal.title}</span>
-                      <span>{goal.deadline}</span>
+                    <TitleText>{goal.title}</TitleText>
+                    <DeadLineText>{goal.deadline}</DeadLineText>
                   </ListItem>
                   ))}
               </List>
@@ -79,8 +79,8 @@ const HistoryOfGoals = () => {
                   {delayedGoals.map((goal) => (
                   <ListItem key={goal.id}>
                     <DeleteButton onClick={() => handleDeleteSection(index)}>X</DeleteButton>
-                      <span>{goal.title}</span>
-                      <span>{goal.deadline}</span>
+                    <TitleText>{goal.title}</TitleText>
+                    <DeadLineText>{goal.deadline}</DeadLineText>
                   </ListItem>
                   ))}
               </List>
@@ -96,8 +96,8 @@ const HistoryOfGoals = () => {
                   {currentGoals.map((goal) => (
                   <ListItem key={goal.id}>
                     <DeleteButton onClick={() => handleDeleteSection(index)}>X</DeleteButton>
-                      <span>{goal.title}</span>
-                      <span>{goal.deadline}</span>
+                    <TitleText>{goal.title}</TitleText>
+                    <DeadLineText>{goal.deadline}</DeadLineText>
                   </ListItem>
                   ))}
               </List>
@@ -122,9 +122,22 @@ const SuperContainer = styled.body`
 const Container = styled.div`
 `;
 
+const TitleText = styled.span`
+  font-size: 18px;
+  font-weight: bold;
+  color: ${(props) => props.theme.text};
+  margin-right: 15px;
+`;
+
+const DeadLineText = styled.span`
+  margin-top: 5px;
+  font-size: 16px;
+  color: ${(props) => props.theme.secondaryText};
+`;
+
 const Header = styled.div`
   display: flex;
-  align-items: flex-start; /* Alinha os itens ao topo */
+  align-items: center; /* Alinha os itens ao topo */
   justify-content: space-between; /* Distribui o espaço entre o botão e o título */
 `;
 
