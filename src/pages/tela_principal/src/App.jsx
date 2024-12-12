@@ -34,8 +34,6 @@ const fadeIn = keyframes`
 
 function App() {
 
-  const navigate = useNavigate();
-
   const [showForm, setShowForm] = useState(false);
   const [editGoalIndex, setEditGoalIndex] = useState(null); // Índice da meta em edição
   const [newGoal, setNewGoal] = useState({
@@ -76,18 +74,6 @@ function App() {
     } else {
       newGoalStatus = "Atual"
     }
-
-    const data = {
-      title: newGoal.title,
-      description: newGoal.description,
-      creationTime: new Date().toISOString(),
-      deadline: newGoal.date,
-      status: newGoalStatus,
-    };
-
-    console.log(data);
-
-    navigate("/HistoryGoals", { state: { goalData: data } });
   };
 
   const addGoal = () => {

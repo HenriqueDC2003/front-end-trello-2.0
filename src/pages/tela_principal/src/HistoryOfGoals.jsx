@@ -22,9 +22,9 @@ const HistoryOfGoals = () => {
     let goalCount = 4;
 
     const goals = [
-        { id: 1, title: "Meta 1", status: "Concluída", deadline: "2023-12-01", creationTime: "2023-11-04" },
-        { id: 2, title: "Meta 2", status: "Atrasada", deadline: "2023-12-05", creationTime: "2022-04-25" },
-        { id: 3, title: "Meta 3", status: "Atual", deadline: "2023-12-10", creationTime: "2023-12-04" },
+        { id: 1, title: "Fazer trabalho de Matematica", status: "Concluída", deadline: "2023-12-01", creationTime: "2023-11-04" },
+        { id: 2, title: "Juntar dinheiro para comprar um carro", status: "Atrasada", deadline: "2023-12-05", creationTime: "2022-04-25" },
+        { id: 3, title: "Juntar dinheiro para comprar uma casa", status: "Atual", deadline: "2023-12-10", creationTime: "2023-12-04" },
     ];
 
     goals.push(
@@ -46,84 +46,86 @@ const HistoryOfGoals = () => {
 
     return (
     <ThemeProvider theme={theme}>
-      <Container>
-          <Header>
-            <BackButton onClick={() => navigate("/TelaPrincipal")}>
-              Voltar
-            </BackButton>
-            <Title>Histórico de Metas</Title>
-        </Header>
+      <SuperContainer>
+        <Container>
+            <Header>
+              <BackButton onClick={() => navigate("/TelaPrincipal")}>
+                Voltar
+              </BackButton>
+              <Title>Histórico de Metas</Title>
+          </Header>
 
-        <Section>
-            <SectionTitle>Metas Concluídas</SectionTitle>
-            {completedGoals.length > 0 ? (
-            <List>
-                {completedGoals.map((goal) => (
-                <ListItem key={goal.id}>
-                    <Indicator color="#1db954" />
-                    <span>{goal.title}</span>
-                    <span>{goal.deadline}</span>
-                </ListItem>
-                ))}
-            </List>
-            ) : (
-            <Message>Nenhuma meta concluída.</Message>
-            )}
-        </Section>
+          <Section>
+              <SectionTitle>Metas Concluídas</SectionTitle>
+              {completedGoals.length > 0 ? (
+              <List>
+                  {completedGoals.map((goal) => (
+                  <ListItem key={goal.id}>
+                    <DeleteButton onClick={() => handleDeleteSection(index)}>X</DeleteButton>
+                      <span>{goal.title}</span>
+                      <span>{goal.deadline}</span>
+                  </ListItem>
+                  ))}
+              </List>
+              ) : (
+              <Message>Nenhuma meta concluída.</Message>
+              )}
+          </Section>
 
-        <Section>
-            <SectionTitle>Metas Atrasadas</SectionTitle>
-            {delayedGoals.length > 0 ? (
-            <List>
-                {delayedGoals.map((goal) => (
-                <ListItem key={goal.id}>
-                    <Indicator color="#FF0000" />
-                    <span>{goal.title}</span>
-                    <span>{goal.deadline}</span>
-                </ListItem>
-                ))}
-            </List>
-            ) : (
-            <Message>Nenhuma meta atrasada.</Message>
-            )}
-        </Section>
+          <Section>
+              <SectionTitle>Metas Atrasadas</SectionTitle>
+              {delayedGoals.length > 0 ? (
+              <List>
+                  {delayedGoals.map((goal) => (
+                  <ListItem key={goal.id}>
+                    <DeleteButton onClick={() => handleDeleteSection(index)}>X</DeleteButton>
+                      <span>{goal.title}</span>
+                      <span>{goal.deadline}</span>
+                  </ListItem>
+                  ))}
+              </List>
+              ) : (
+              <Message>Nenhuma meta atrasada.</Message>
+              )}
+          </Section>
 
-        <Section>
-            <SectionTitle>Metas Atuais</SectionTitle>
-            {currentGoals.length > 0 ? (
-            <List>
-                {currentGoals.map((goal) => (
-                <ListItem key={goal.id}>
-                    <Indicator color="#FFD700" />
-                    <span>{goal.title}</span>
-                    <span>{goal.deadline}</span>
-                </ListItem>
-                ))}
-            </List>
-            ) : (
-            <Message>Nenhuma meta atual.</Message>
-            )}
-        </Section>
-      </Container>
+          <Section>
+              <SectionTitle>Metas Atuais</SectionTitle>
+              {currentGoals.length > 0 ? (
+              <List>
+                  {currentGoals.map((goal) => (
+                  <ListItem key={goal.id}>
+                    <DeleteButton onClick={() => handleDeleteSection(index)}>X</DeleteButton>
+                      <span>{goal.title}</span>
+                      <span>{goal.deadline}</span>
+                  </ListItem>
+                  ))}
+              </List>
+              ) : (
+              <Message>Nenhuma meta atual.</Message>
+              )}
+          </Section>
+        </Container>
+      </SuperContainer>
     </ThemeProvider>
     );
 };
 
-const Container = styled.div`
-  padding: 20px;
+
+
+const SuperContainer = styled.body`
   background-color: #0D0D0D;
-  color: var(--text-primary);
-  border-radius: 8px;
-  margin: 20px auto;
-  width: 100%;
-  font-family: var(--font-family);
+  heigth: 100%;
+  width: 100vw;
+`;
+
+const Container = styled.div`
 `;
 
 const Header = styled.div`
   display: flex;
-  align-items: center;
+  align-items: flex-start; /* Alinha os itens ao topo */
   justify-content: space-between; /* Distribui o espaço entre o botão e o título */
-  margin-bottom: 20px;
 `;
 
 const BackButton = styled.button`
@@ -137,6 +139,18 @@ const BackButton = styled.button`
   &:hover {
     background-color: var(--button-hover, #17a043);
   }
+    margin-left: 10px;
+`;
+
+const DeleteButton = styled.button`
+  background-color: transparent;
+  color: ${(props) => props.theme.text};
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+  &:hover {
+    color: ${(props) => props.theme.highPriority};
+  }
 `;
 
 const Title = styled.h1`
@@ -145,11 +159,12 @@ const Title = styled.h1`
   color: var(--primary-color);
   text-align: center; /* Centraliza o título */
   flex-grow: 1; /* Faz o título ocupar o espaço disponível */
+  margin-right: 80px;
 `;
 
 const Section = styled.section`
   margin-top: 20px;
-  padding: 15px;
+  align-items: center;
   background-color: var(--card-background);
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -164,7 +179,7 @@ const SectionTitle = styled.h2`
 const List = styled.ul`
   list-style: none;
   padding: 0;
-  background-color: #3333;
+  background-color: #1A1A1A;
   border-radius: 8px;
   align-items: flex-start;
 `;
@@ -180,17 +195,6 @@ const ListItem = styled.li`
   justify-content: space-between;
   align-items: center;
   position: relative;
-`;
-
-const Indicator = styled.div`
-  position: absolute;
-  left: -10px;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background-color: ${({ color }) => color};
 `;
 
 const Message = styled.p`

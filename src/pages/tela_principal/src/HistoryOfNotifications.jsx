@@ -15,6 +15,11 @@ const HistoryOfNotifications = () => {
       description: "Juntar dinheiro para comprar um carro",
       date: new Date("2024-12-11"),
     },
+    {
+      title: "Falta uma semana para a data da meta",
+      description: "Juntar dinheiro para comprar uma casa",
+      date: new Date("2024-12-11"),
+    },
   ]);
 
   const handleDeleteSection = (index) => {
@@ -77,7 +82,6 @@ const AppContainer = styled.div`
 
 const NotificationSection = styled.section`
   display: flex;
-  justify-content: space-between;
   align-items: center;
   margin-top: 20px;
   padding: 15px;
@@ -88,7 +92,7 @@ const NotificationSection = styled.section`
 
 const ContentWrapper = styled.div`
   flex-grow: 1;
-  margin-right: 10px;
+  margin-right: 20px;
 `;
 
 const TitleText = styled.span`
@@ -136,14 +140,14 @@ const DeleteButton = styled.button`
 
 const Header = styled.div`
   display: flex;
-  align-items: center;
-  align-self: center; /* Centraliza horizontalmente */
+  align-items: center; 
   width: 100%;
 `;
 
 const Title = styled.h1`
-  font-size: 24px;
+  font-size: 28px;
   color: ${(props) => props.theme.text};
+  padding-left: 450px;
 `;
 
 export default HistoryOfNotifications;
